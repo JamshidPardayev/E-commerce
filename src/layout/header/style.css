@@ -1,0 +1,31 @@
+.navActive {
+  position: relative;
+  transition: all 0.3s;
+}
+
+.navActive:hover {
+  color: #B88E2F;
+}
+
+.navActive::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #B88E2F;
+  transition: width 0.3s;
+}
+
+.navActive:hover::before {
+  width: 100%;
+}
+
+.navActive-active {
+  color: #B88E2F;
+}
+
+.navActive-active::before {
+  width: 100%;
+}
