@@ -2,19 +2,26 @@ import { useProduct } from "@/api/hooks/useProduct";
 import { Pagination } from "antd";
 import React from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { RightOutlined } from "@ant-design/icons";
+import {
+  HeartOutlined,
+  RightOutlined,
+  ShareAltOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
 
-import shopHero from "@/assets/shopHero.png";
-import guarantee from "@/assets/guarantee.svg";
-import support from "@/assets/support.svg";
-import trophy from "@/assets/trophy.svg";
-import shipping from "@/assets/shipping.svg";
+import shopHero from "@/assets/hero.png";
 import vector from "@/assets/vector.svg";
 import dotted4 from "@/assets/dotted.svg";
 import viewList from "@/assets/view-list.svg";
+import toast from "react-hot-toast";
+import Services from "../services/Services";
 
 const Shop = () => {
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    toast.success("Added To Wishlist!💖");
+  };
   const { getProduct } = useProduct();
 
   const [params, setParams] = useSearchParams();
@@ -62,8 +69,18 @@ const Shop = () => {
             <p className="text-[15px]">Showing 1–16 of 32 results</p>
           </div>
           <div className="flex items-center gap-6">
-            <p className="text-[16px]">Show <span className="px-3 py-2 bg-white ml-[10px] text-[#9F9F9F] rounded-[3px] ">16</span></p>
-            <p className="text-[16px]">Sort By <span className="px-3 py-2 bg-white ml-[10px] text-[#9F9F9F] rounded-[3px] ">Default</span></p>
+            <p className="text-[16px]">
+              Show{" "}
+              <span className="px-3 py-2 bg-white ml-[10px] text-[#9F9F9F] rounded-[3px] ">
+                16
+              </span>
+            </p>
+            <p className="text-[16px]">
+              Sort By{" "}
+              <span className="px-3 py-2 bg-white ml-[10px] text-[#9F9F9F] rounded-[3px] ">
+                Default
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -72,13 +89,35 @@ const Shop = () => {
       <div className="max-w-[1200px] mx-auto px-3  grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-x-3 gap-y-5 max-sm:grid-cols-1 my-[50px]">
         {data?.data?.products?.map((product) => (
           <div
-            // data-aos="flip-right"
+            data-aos="flip-right"
             key={product.id}
-            className="bg-[#F4F5F7] rounded-[3px] max-sm:text-center"
+            className="bg-[#F4F5F7] rounded-[3px] max-sm:text-center relative group cursor-pointer hover:opacity-[80%] hover:bg-[#1f1f1fb7]"
           >
+            <div className="hidden absolute left-0 top-[40%] group-hover:block w-full text-center space-y-2 py-2">
+              <button
+                onClick={() => toast.success("Added To Cart!✅")}
+                className="bg-white text-[#B88E2F] hover:text-amber-700 duration-300 px-8 py-2 text-[15px] font-semibold rounded"
+              >
+                Add to cart
+              </button>
+              <div className="flex justify-center gap-6 text-xl text-white duration-300">
+                <div className="hover:text-amber-600 duration-300">
+                  <ShareAltOutlined />
+                </div>
+                <div className="hover:text-amber-600 duration-300">
+                  <SwapOutlined />
+                </div>
+                <div
+                  onClick={() => handleClick()}
+                  className="hover:text-amber-600 duration-300"
+                >
+                  <HeartOutlined />
+                </div>
+              </div>
+            </div>
             <img
               className="max-sm:text-center max-sm:mx-auto"
-              //   onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => navigate(`/product/${product.id}`)}
               src={product?.thumbnail}
               alt=""
             />
@@ -104,55 +143,7 @@ const Shop = () => {
           pageSize={pageSize}
         />
       </div>
-      <div className="min-h-[250px] bg-[#FAF3EA] content-center my-[50px]">
-        <div className="max-w-[1200px] mx-auto px-3 flex flex-wrap  justify-between gap-x-3 gap-y-6 py-[30px]">
-          <div className="flex items-center gap-x-2">
-            <img src={trophy} alt="trophy" />
-            <div>
-              <h3 className="text-[#242424] text-[18px] font-semibold">
-                High Quality
-              </h3>
-              <p className="text-[#898989] text-[15px] mt-1">
-                crafted from top materials
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-x-2">
-            <img src={guarantee} alt="guarantee" />
-            <div>
-              <h3 className="text-[#242424] text-[18px] font-semibold">
-                Warranty Protection
-              </h3>
-              <p className="text-[#898989] text-[15px] mt-1">Over 2 years</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-x-2">
-            <img src={shipping} alt="shipping" />
-            <div>
-              <h3 className="text-[#242424] text-[18px] font-semibold">
-                Free Shipping
-              </h3>
-              <p className="text-[#898989] text-[15px] mt-1">
-                Order over 150 $
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-x-2">
-            <img src={support} alt="support" />
-            <div>
-              <h3 className="text-[#242424] text-[18px] font-semibold">
-                24 / 7 Support
-              </h3>
-              <p className="text-[#898989] text-[15px] mt-1">
-                Dedicated support
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Services />
     </div>
   );
 };

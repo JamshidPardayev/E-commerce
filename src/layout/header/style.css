@@ -1,4 +1,4 @@
-.navActive {
+/* .navActive {
   position: relative;
   transition: all 0.3s;
 }
@@ -28,4 +28,19 @@
 
 .navActive-active::before {
   width: 100%;
+} */
+/* ////new */
+.navActive.active{
+    border-bottom: 2px solid #B88E2F;
+    color: #B88E2F;
+    font-weight: bold;
+}
+.navActive:hover{
+    color: #B88E2F;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+.navActive:hover::before{
+    width: 100%;
+    color: #B88E2F;
 }
