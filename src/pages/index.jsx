@@ -1,11 +1,14 @@
 import { Suspense } from '@/utils'
-import { lazy } from 'react'
+import React, { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
-import About from './about/About'
-import Contact from './contact/Contact'
+import ProductDetail from './producDetail/ProductDetail'
 const Layout = lazy(()=> import("./layout/Layout"))
 const Home = lazy(()=> import("./home/Home"))
 const Shop = lazy(()=> import("./shop/Shop"))
+const About = lazy(()=> import("./about/About"))
+const Contact = lazy(()=> import("./contact/Contact"))
+const Wishlist = lazy(()=> import("./wishlist/Wishlist"))
+const Cart = lazy(()=> import("./cart/Cart"))
 
 const MainRouters = () => {
   return (
@@ -17,7 +20,9 @@ const MainRouters = () => {
           {path: "/shop", element:<Suspense><Shop/></Suspense> },
           {path: "/about", element:<Suspense><About/></Suspense> },
           {path: "/contact", element:<Suspense><Contact/></Suspense> },
-          {path: "/product/:id", element:<Suspense><div>detail</div></Suspense> },
+          {path: "/wishlist", element:<Suspense><Wishlist/></Suspense> },
+          {path: "/cart", element:<Suspense><Cart/></Suspense> },
+          {path: "/product/:id", element:<Suspense><ProductDetail/></Suspense> },
         ]},
       ])
     }
@@ -26,4 +31,4 @@ const MainRouters = () => {
   )
 }
 
-export default MainRouters
+export default React.memo(MainRouters)

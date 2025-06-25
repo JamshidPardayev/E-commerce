@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   UserOutlined,
   SearchOutlined,
@@ -10,8 +10,13 @@ import {
 import logo from "@/assets/vite.svg";
 import "./style.css";
 import { Badge } from "antd";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
+  const wishlist = useSelector((state) => state.wishlist.value)
+  const cart = useSelector((state) => state.cart.value)
+
   return (
     <header className="max-w-[1200px] min-h-[100px] flex items-center justify-between mx-auto px-3">
       <h2 className="flex items-center">
@@ -60,16 +65,20 @@ const Header = () => {
           <SearchOutlined />
         </div>
 
-        <Badge count={0} showZero>
-          <div className="hover:text-[#B88E2F] text-[18px] duration-300 cursor-pointer ">
-            <HeartOutlined />
-          </div>
-        </Badge>
-        <Badge count={0} showZero>
-          <div className="hover:text-[#B88E2F] text-[20px] duration-300 cursor-pointer ">
-            <ShoppingCartOutlined />
-          </div>
-        </Badge>
+        <Link to={"/wishlist"}>
+          <Badge count={wishlist.length} showZero>
+            <div className="hover:text-[#B88E2F] text-[18px] duration-300 cursor-pointer ">
+              <HeartOutlined />
+            </div>
+          </Badge>
+        </Link>
+        <Link to={"/cart"}>
+          <Badge count={cart.length} showZero>
+            <div className="hover:text-[#B88E2F] text-[20px] duration-300 cursor-pointer ">
+              <ShoppingCartOutlined />
+            </div>
+          </Badge>
+        </Link>
 
         <div className="text-[25px] hover:text-[#B88E2F] duration-300 cursor-pointer hidden max-sm:block">
           <MenuOutlined />

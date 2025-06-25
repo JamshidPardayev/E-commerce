@@ -1,16 +1,16 @@
 import React from "react";
 import Hero from "../hero/Hero";
 import Main from "../main/Main";
-import Products from "../products/Products";
 import Rooms from "../rooms/Rooms";
 import Gallery from "../gallery/Gallery";
+import Product from "../product/Product";
 
 const Home = () => {
   return (
     <div>
       <Hero />
       <Main />
-      <Products />
+      <Product />
       <Rooms />
       <Gallery />
     </div>

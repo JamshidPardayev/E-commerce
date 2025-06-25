@@ -1,13 +1,14 @@
-import React from "react"
-import logo from "@/assets/vite.svg"
+import React from "react";
 
 export const Loading = () => {
-    return <div className="w-full h-screen flex flex-col justify-center items-center">
-        <img src={logo} alt="" />
-        <p className="text-gray-600 text-sm">Yuklanmoqda...</p>
+  return (
+    <div className="w-full h-screen flex flex-col gap-6 justify-center items-center">
+      <p className="text-gray-600 text-lg">Loading...</p>
+      <span className="loader"></span>
     </div>
-}
+  );
+};
 
-export const Suspense = ({children}) => {
-    return <React.Suspense fallback={<Loading/>}>{children}</React.Suspense>
-}
+export const Suspense = ({ children }) => {
+  return <React.Suspense fallback={<Loading />}>{children}</React.Suspense>;
+};
