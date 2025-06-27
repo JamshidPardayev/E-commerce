@@ -1,7 +1,7 @@
 import Products from "@/components/products/Products";
 import React from "react";
 import { useSelector } from "react-redux";
-import wishlistGif from "@/assets/wishlistGif.gif";
+// import wishlistGif from "@/assets/wishlistGif.gif";
 const Wishlist = () => {
   const wishlist = useSelector((state) => state.wishlist.value);
   console.log(wishlist);
@@ -14,8 +14,9 @@ const Wishlist = () => {
       {wishlist.length ? (
         <Products data={wishlist} />
       ) : (
-        <div className="max-w-[400px] mx-auto">
-          <img src={wishlistGif} alt="wishlist" className="w-full"/>
+        <div className="max-w-[400px] mx-auto text-center">
+          <p>Wishlist Not Have💔</p>
+          {/* <img src={wishlistGif} alt="wishlist" className="w-full"/> */}
         </div>
       )}
     </div>

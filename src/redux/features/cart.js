@@ -27,7 +27,6 @@ export const cartSlice = createSlice({
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
-      toast.success("Product Increased!➕");
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
     decrementCart: (state, action) => {
@@ -36,18 +35,15 @@ export const cartSlice = createSlice({
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
-      toast.success("Product Decreased!➖");
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
     removeCart: (state, action) => {
       state.value = state.value.filter((item) => item.id !== action.payload.id);
-      toast.error("Cart Removed!❌");
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
     clearCart: (state) => {
       state.value = [];
       localStorage.setItem("cart", JSON.stringify(state.value));
-      toast.error("Cart Cleared!🧹");
     },
   },
 });

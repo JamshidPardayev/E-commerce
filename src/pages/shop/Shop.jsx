@@ -13,12 +13,14 @@ import Products from "../../components/products/Products";
 
 const Shop = () => {
   const { getProduct } = useProduct();
-
   const [params, setParams] = useSearchParams();
   const page = params.get("page") || 1;
   const pageSize = params.get("pageSize") || 16;
 
-  const { data, isPending } = getProduct({ limit: pageSize, skip: pageSize * (page - 1) });
+  const { data, isPending } = getProduct({
+    limit: pageSize,
+    skip: pageSize * (page - 1),
+  });
 
   const handleChangePage = (page, pageS) => {
     if (pageS !== pageSize) {
@@ -73,6 +75,25 @@ const Shop = () => {
         </div>
       </div>
 
+      {/* <div className="max-w-[1200px] mx-auto px-3">
+        <form action="" className="mt-8">
+          <input
+            type="text"
+            value={value}
+            onChange={handleChange}
+            className="border h-[40px] w-full rounded-[10px] outline-none border-gray-300 px-4"
+            placeholder="Search. . ."
+          />
+        </form>
+        <div>
+          {data?.data?.products?.map((item) => (
+            <div key={item.id}>
+              <img src={item?.thumbnail} alt={item?.title} />
+              <p>{item?.title}</p>
+            </div>
+          ))}
+        </div>
+      </div> */}
       <Products data={data?.data?.products} loading={isPending} count={16} />
       <div className="flex justify-center px-3">
         <Pagination

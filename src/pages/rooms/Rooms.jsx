@@ -62,7 +62,7 @@ const Rooms = () => {
         </div>
       ),
     },
-     {
+    {
       key: "5",
       label: (
         <p className="w-[35px] h-[35px] text-center content-center text-[20px] text-[#B88E2F] border cursor-pointer shadow-[0px_0px_5px_1px_#B88E2F]">
@@ -93,19 +93,19 @@ const Rooms = () => {
         </div>
         <div className="max-md:hidden">
           <img
-            data-aos="flip-right"
+            // data-aos="flip-right"
             src={roomImg}
             alt="roomImg"
             className="h-[475px]"
           />
         </div>
         <div className="sm:w-[382px] max-w-[500px] w-full">
-            <Tabs
-              data-aos="flip-right"
-              defaultActiveKey="1"
-              items={items}
-              onChange={onChange}
-            />
+          <Tabs
+            // data-aos="flip-right"
+            defaultActiveKey="1"
+            items={items}
+            onChange={onChange}
+          />
         </div>
       </div>
     </div>

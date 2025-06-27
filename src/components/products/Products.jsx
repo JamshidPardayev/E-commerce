@@ -23,12 +23,14 @@ const Skeleton = ({ count }) => {
 
 const Products = ({ data, loading, count }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1200px] mx-auto p-3 gap-6 my-[50px]">
-      {loading ? (
-        <Skeleton count={count} />
-      ) : (
-        data?.map((product) => <ProductItem key={product?.id} {...product} />)
-      )}
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1200px] mx-auto p-3 gap-6  my-[40px]">
+        {loading ? (
+          <Skeleton count={count} />
+        ) : (
+          data?.map((product) => <ProductItem key={product?.id} {...product} />)
+        )}
+      </div>
     </div>
   );
 };

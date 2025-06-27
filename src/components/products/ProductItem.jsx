@@ -25,7 +25,7 @@ const ProductItem = (product) => {
   const isDisabled = disabledIds.includes(product.id);
   return (
     <div
-      data-aos="flip-right"
+      // data-aos="flip-right"
       className="group bg-[#F4F5F7] p-[3px] rounded-[3px] max-sm:text-center relative cursor-pointer"
     >
       <div className="group-hover:flex hidden justify-end absolute top-0 right-0 z-10 text-white p-2 gap-2 text-xl duration-300">
@@ -48,18 +48,20 @@ const ProductItem = (product) => {
           )}
         </div>
       </div>
-
       <div className="w-full h-[250px] overflow-hidden bg-white">
         <img
           className="w-full h-full object-cover hover:scale-105 duration-300"
-          onClick={() => navigate(`/product/${id}`)}
+          onClick={() => navigate(`/product/${id}`, { state: { product } })}
           src={thumbnail}
           alt={title}
         />
       </div>
 
       <div className="p-4">
-        <div className="text-[24px] text-[#3A3A3A] font-semibold line-clamp-1">
+        <div
+          onClick={() => navigate(`/product/${id}`, { state: { product } })}
+          className="text-[24px] text-[#3A3A3A] font-semibold line-clamp-1 hover:text-blue-600 duration-300 hover:underline"
+        >
           {title}
         </div>
         <div className="text-[#898989] line-clamp-1 my-2">{category}</div>

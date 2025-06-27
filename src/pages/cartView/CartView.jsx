@@ -7,10 +7,12 @@ import {
   incrementCart,
   removeCart,
 } from "@/redux/features/cart";
+import { useNavigate } from "react-router-dom";
 
 const CartView = () => {
   const cart = useSelector((state) => state.cart.value);
   console.log(cart);
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
 
@@ -93,7 +95,7 @@ const CartView = () => {
               .toFixed(2)}
           </strong>
         </p>
-        <button className="w-[200px] h-[50px] rounded-[15px] border text-[#B88E2F] duration-300 hover:text-amber-700 cursor-pointer">
+        <button onClick={() => navigate("/checkout")} className="w-[200px] h-[50px] rounded-[15px] border text-[#B88E2F] duration-300 hover:text-amber-700 cursor-pointer">
           Check Out
         </button>
       </div>

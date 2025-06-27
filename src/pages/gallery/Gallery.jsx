@@ -21,39 +21,84 @@ const Gallery = () => {
         <div>
           <div className="flex items-end gap-3">
             <div className="max-w-[80px] h-[380px]">
-              <img data-aos="zoom-in" src={gallery1} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery1}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
             <div className="max-w-[450px] h-[310px]">
-              <img data-aos="zoom-in" src={gallery2} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery2}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
           </div>
           <div className="flex gap-3 items-start mt-3">
             <div className="max-w-[180px] h-[320px]">
-              <img data-aos="zoom-in" src={gallery3} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery3}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
             <div className="max-w-[340px] h-[240px]">
-              <img data-aos="zoom-in" src={gallery4} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery4}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>
         <div className="max-w-[290px] h-[390px]">
-          <img data-aos="zoom-in" src={gallery5} alt="gallaryImg" className="w-full h-full" />
+          <img
+            // data-aos="zoom-in"
+            src={gallery5}
+            alt="gallaryImg"
+            className="w-full h-full"
+          />
         </div>
         <div>
           <div className="flex items-end gap-3">
             <div className="max-w-[290px] h-[350px]">
-              <img data-aos="zoom-in" src={gallery6} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery6}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
             <div className="max-w-[250px] h-[430px]">
-              <img data-aos="zoom-in" src={gallery7} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery7}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
           </div>
           <div className="flex gap-3 items-start mt-3">
             <div className="max-w-[170px] h-[240px]">
-              <img data-aos="zoom-in" src={gallery8} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery8}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
             <div className="max-w-[250px] h-[190px]">
-              <img data-aos="zoom-in" src={gallery9} alt="gallaryImg" className="w-full h-full" />
+              <img
+                // data-aos="zoom-in"
+                src={gallery9}
+                alt="gallaryImg"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>

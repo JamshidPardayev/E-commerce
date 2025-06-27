@@ -11,14 +11,20 @@ const Main = () => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
       <div className="flex justify-between gap-x-3 gap-y-10 mt-12 max-md:mt-6 max-sm:flex-col ">
-        <div data-aos="flip-right" className="max-w-[350px] max-sm:mx-auto">
+        <div
+          //  data-aos="flip-right"
+          className="max-w-[350px] max-sm:mx-auto"
+        >
           <Card hoverable cover={<Image src={dining} />}>
             <p className="text-center text-[22px] text-[#333333] font-semibold">
               Dining
             </p>
           </Card>
         </div>
-        <div data-aos="flip-right" className="max-w-[350px] max-sm:mx-auto">
+        <div
+          //  data-aos="flip-right"
+          className="max-w-[350px] max-sm:mx-auto"
+        >
           <Card
             hoverable
             cover={
@@ -32,7 +38,9 @@ const Main = () => {
             </p>
           </Card>
         </div>
-        <div data-aos="flip-right" className="max-w-[350px] max-sm:mx-auto">
+        <div 
+        // data-aos="flip-right" 
+        className="max-w-[350px] max-sm:mx-auto">
           <Card hoverable cover={<Image src={bedroom} />}>
             <p className="text-center text-[22px] text-[#333333] font-semibold">
               Bedroom

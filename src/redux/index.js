@@ -6,6 +6,5 @@ export const store = configureStore({
   reducer: {
     wishlist,
     cart,
-    // products,
   },
 });
