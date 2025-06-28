@@ -198,7 +198,9 @@ const Checkout = () => {
               {cart?.map((item) => (
                 <div key={item.id} className="mb-2 text-[16px]">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">{item.title} * {item.quantity}</span>
+                    <span className="font-medium">
+                      {item.title} * {item.quantity}
+                    </span>
                     <span className="text-gray-600">
                       <strong className="text-[#B88E2F]">
                         ${(item.price * item.quantity).toFixed(2)}
