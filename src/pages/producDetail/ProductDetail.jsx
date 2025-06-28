@@ -9,11 +9,8 @@ import {
   LinkedinFilled,
   TwitterSquareFilled,
 } from "@ant-design/icons";
-import {
-  addToCart,
-  decrementCart,
-  incrementCart,
-} from "@/redux/features/cart";
+import { addToCart, decrementCart, incrementCart } from "@/redux/features/cart";
+import ProductTabs from "../productTabs/ProductTabs";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -49,8 +46,8 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="bg-[#F9F1E7] py-5 pl-10 text-gray-700">
+    <div>
+      <div className="bg-[#F9F1E7] py-5 px-3 text-gray-700">
         <div className="flex items-center gap-2 text-sm">
           <p
             className="cursor-pointer hover:underline"
@@ -70,8 +67,8 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <main className="flex-grow py-12 px-6 lg:px-0 container mx-auto space-y-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <main className="max-w-[1200px] py-12 px-3 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           <div className="bg-[#F9F1E7] p-6 rounded-lg flex justify-center items-center min-h-[400px]">
             <img
               src={product.thumbnail}
@@ -155,6 +152,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+        <ProductTabs />
 
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-800 text-center">
