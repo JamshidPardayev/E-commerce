@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Products from "@/components/products/Products";
 import { useProduct } from "@/api/hooks/useProduct";
 import { Rate } from "antd";
@@ -9,22 +9,42 @@ import {
   LinkedinFilled,
   TwitterSquareFilled,
 } from "@ant-design/icons";
-import { decrementCart, incrementCart } from "@/redux/features/cart";
+import {
+  addToCart,
+  decrementCart,
+  incrementCart,
+} from "@/redux/features/cart";
 
 const ProductDetails = () => {
-  const navigate = useNavigate();
+  const { id } = useParams();
   const { state } = useLocation();
-  const product = state?.product;
-  const { getProduct } = useProduct();
-  const { data, isLoading } = getProduct({ limit: 4 });
-  const [value, setValue] = useState(5);
+  const productFromState = state?.product;
+  const { getOneProduct, getProduct } = useProduct();
+  const { data: relatedData, isLoading: isRelatedLoading } = getProduct({
+    limit: 4,
+  });
+  const { data: fetchedProduct, isLoading } = getOneProduct(id);
+  const product = productFromState || fetchedProduct;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [value, setValue] = useState(5);
   const cart = useSelector((state) => state.cart.value);
-  const itemInCart = cart.find((item) => item.id === product.id);
-  const quantity = itemInCart?.quantity || 1;
+  const itemInCart = cart.find((item) => item.id === product?.id);
+  const quantity = itemInCart?.quantity || 0;
+
+  const handleAddToCart = () => {
+    if (!itemInCart) {
+      dispatch(addToCart(product));
+    }
+  };
+
+  if (isLoading && !productFromState) {
+    return <div className="text-[30px] text-center py-20">Loading...</div>;
+  }
+
   if (!product) {
     return (
-      <div className="text-[30px] text-center py-20 ">Product Not Have❌</div>
+      <div className="text-[30px] text-center py-20">Product Not Found ❌</div>
     );
   }
 
@@ -49,6 +69,7 @@ const ProductDetails = () => {
           <p className="font-semibold">{product.title}</p>
         </div>
       </div>
+
       <main className="flex-grow py-12 px-6 lg:px-0 container mx-auto space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="bg-[#F9F1E7] p-6 rounded-lg flex justify-center items-center min-h-[400px]">
@@ -70,87 +91,80 @@ const ProductDetails = () => {
                 ${product.price}
               </p>
             </div>
-            <p>
-              <Rate onChange={setValue} value={value} />
-            </p>
+            <Rate onChange={setValue} value={value} />
             <p className="text-gray-600 leading-relaxed">
               {product.description ||
                 "Bu mahsulot haqida batafsil ma'lumot mavjud emas."}
             </p>
-            <div>
-              <p className="text=[24px] font-semibold mb-3">Size</p>
-              <div className="flex gap-3">
-                <button className="w-[30px] h-[30px] bg-[#B88E2F] text-white rounded-[2px] cursor-pointer">
-                  L
-                </button>
-                <button className="w-[30px] h-[30px] bg-[#F9F1E7] text-black rounded-[2px] cursor-pointer">
-                  XL
-                </button>
-                <button className="w-[30px] h-[30px] bg-[#F9F1E7] text-black rounded-[2px] cursor-pointer">
-                  XS
-                </button>
-              </div>
-            </div>
-            <div className=" flex gap-3 items-center max-md:flex-wrap">
-              <div className="border text-[#B88E2F] p-1 px-3 flex items-center gap-2">
+
+            <div className="flex gap-3 items-center max-md:flex-wrap">
+              {quantity > 0 ? (
+                <div className="border text-[#B88E2F] p-1 px-3 flex items-center gap-2">
+                  <button
+                    disabled={quantity <= 1}
+                    onClick={() => dispatch(decrementCart(product))}
+                    className="disabled:opacity-50 text-[20px] font-medium cursor-pointer"
+                  >
+                    -
+                  </button>
+                  <span className="text-[18px]">{quantity}</span>
+                  <button
+                    onClick={() => dispatch(incrementCart(product))}
+                    className="text-[20px] font-medium cursor-pointer"
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
                 <button
-                  disabled={quantity <= 1}
-                  onClick={() => dispatch(decrementCart(product))}
-                  className="disabled:opacity-50 text-[20px] font-medium cursor-pointer"
+                  onClick={handleAddToCart}
+                  className="px-6 py-2 border text-[#B88E2F] rounded hover:text-amber-700 duration-300"
                 >
-                  -
+                  Add to cart
                 </button>
-                <span className="text-[18px]">{quantity}</span>
-                <button
-                  onClick={() => dispatch(incrementCart(product))}
-                  className="text-[20px] font-medium cursor-pointer"
-                >
-                  +
-                </button>
-              </div>
-              <button
-                onClick={() => navigate("/cart")}
-                className="px-6 py-2 text-[#B88E2F] border rounded hover:text-amber-700 duration-300  cursor-pointer"
-              >
-                Add To Cart
-              </button>
-              <button className="px-6 py-2 text-[#B88E2F] border rounded hover:text-amber-700 duration-300  cursor-pointer">
+              )}
+              <button className="px-6 py-2 text-[#B88E2F] border rounded hover:text-amber-700 duration-300">
                 + Compare
               </button>
             </div>
 
-            <div className="text-[#9F9F9F]">
+            <div className="text-[#9F9F9F] mt-4 space-y-1">
               <p>
-                <span className="text-[18px] font-medium">SKU</span>:{" "}
-                {product?.sku}
+                <span className="font-medium">SKU:</span> {product.sku || "N/A"}
               </p>
               <p>
-                <span className="text-[18px] font-medium">Category</span>:{" "}
-                {product?.sku}
+                <span className="font-medium">Category:</span>{" "}
+                {product.category}
               </p>
               <p>
-                <span className="text-[18px] font-medium">Tags</span>:
-                {product?.tags?.map((tag, index) => (
-                  <span key={index} className="ml-1">
+                <span className="font-medium">Tags:</span>
+                {product.tags?.map((tag, i) => (
+                  <span key={i} className="ml-1">
                     {tag}
                   </span>
-                ))}
+                )) || " - "}
               </p>
               <p className="flex gap-x-3">
-                <span className="text-[18px] font-medium">Share</span>:
+                <span className="font-medium">Share:</span>
                 <div className="flex gap-x-2 text-black">
                   <FacebookFilled />
                   <LinkedinFilled />
                   <TwitterSquareFilled />
-                </div>{" "}
+                </div>
               </p>
             </div>
           </div>
         </div>
-        {/* <ProductTabs /> */}
+
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800 text-center">Related Products</h2>
-          <Products data={data?.data?.products} loading={isLoading} count={4} />
+          <h2 className="text-2xl font-bold text-gray-800 text-center">
+            Related Products
+          </h2>
+          <Products
+            data={relatedData?.data?.products}
+            loading={isRelatedLoading}
+            count={4}
+          />
           <div className="text-center mt-6">
             <button
               onClick={() => navigate("/shop")}

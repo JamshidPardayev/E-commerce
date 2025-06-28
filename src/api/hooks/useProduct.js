@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "..";
+import { api } from "@/api";
 
 export const useProduct = () => {
   const getProduct = (params) =>
@@ -7,11 +7,20 @@ export const useProduct = () => {
       queryKey: ["product", params],
       queryFn: () => api.get("/products", { params }),
     });
-  const getSearchProduct = (params) =>
+
+  const getOneProduct = (id) =>
     useQuery({
-      queryKey: ["searc", params],
-      queryFn: () => api.get("/products/search", { params }),
+      queryKey: ["product", id],
+      queryFn: () => api.get(`/products/${id}`).then((res) => res.data),
+      enabled: !!id,
     });
 
-  return { getProduct, getSearchProduct };
+  const getSearchProduct = (params) =>
+    useQuery({
+      queryKey: ["search", params],
+      queryFn: () => api.get("/products/search", { params }),
+      enabled: !!params?.q,
+    });
+
+  return { getProduct, getSearchProduct, getOneProduct };
 };
